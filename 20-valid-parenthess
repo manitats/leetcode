@@ -1,0 +1,29 @@
+class Solution {
+    private static Map<String, String> map = new HashMap<>();
+    static {
+        map.put(")","(");
+        map.put("]","[");
+        map.put("}","{");
+    }
+
+    public boolean isValid(String s) {
+        if(s == null || s.isEmpty()) return true;
+        String[] strs = s.split("");
+        Deque<String> stack = new ArrayDeque<String>();
+
+
+        for (String str : strs) {
+            //System.out.println(str);
+            if (map.get(str) != null) {
+                if(map.get(str).equals(stack.peek())) {
+                    stack.pop();
+                } else {
+                    return false;
+                }
+            } else {
+               stack.push(str);
+            }
+        }
+    return stack.isEmpty();
+    }
+}
